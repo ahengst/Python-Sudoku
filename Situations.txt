@@ -1,0 +1,115 @@
+Elektor #520
+NEXT example for 2 in BOX(9,13)
+solution for 2 at r11 c15
+11,15 has 2 possible answers, but of those, "2" has no other places to go within THIS BOX
+  2 finds a way with (a) but I did't catch how.
+
+
+
+variants of new algorithm: ROW, COL, BOX.
+For each candidate, 
+   test that candidate at all empty cells. If only 1 empty cell can hold candidate, put it in there.
+
+New def single_candidate_c return(r,c)
+   for each row...   DONE
+   for each col...   DONE
+   for each box...
+        for each Symbol not yet appeared
+           count candidates, if sum==1 that symbol can only be in one of the cells
+..
+ALSO gives solution for 7 in BOX 4,4 cell r13 c13
+-----------------------------------------       -----------------------------------------
+|   1 3 F |         |         | E 2 7   |   1   | 3 0 0 0 | 7 5 6 8 | 5 5 7 6 | 0 0 0 4 |  1
+| 0 6 5   |         |         |   8 C D |   2   | 0 0 0 4 | 6 4 4 4 | 6 6 3 5 | 3 0 0 0 |  2
+|   8     |   2     |     E   |     6   |   3   | 3 0 2 4 | 9 0 5 8 | 8 7 0 8 | 4 3 0 4 |  3
+| 9 B D E | 4   7   |   C   2 | F 3 A 5 |   4   | 0 0 0 0 | 0 2 0 4 | 3 0 3 0 | 0 0 0 0 |  4
+-----------------------------------------       -----------------------------------------
+| F 7 E 8 |     D   |   B     | A 6 5 1 |   5   | 0 0 0 0 | 4 4 0 4 | 3 0 3 3 | 0 0 0 0 |  5
+|   9 0   | 6 1     |     3 F | D 4 B C |   6   | 2 0 0 3 | 0 0 4 4 | 3 3 0 0 | 0 0 0 0 |  6
+|   D 4   |   F     |     9   | 2 7 8 3 |   7   | 2 0 0 3 | 5 0 4 4 | 5 5 0 6 | 0 0 0 0 |  7
+| 1 C 6 3 | 2     B | D     8 | 9 E 0 F |   8   | 0 0 0 0 | 0 2 2 0 | 0 3 3 0 | 0 0 0 0 |  8
+-----------------------------------------       -----------------------------------------
+|     1 6 |   8 0   |   D 2   | 5       |   9   | 4 3 0 0 | 6 0 0 4 | 4 0 0 5 | 0 3 3 5 |  9
+|   E A   |   D 9 2 | 8 5 F   |   0 1   |  10   | 4 0 0 4 | 4 0 0 0 | 0 0 0 5 | 5 0 0 4 |  10
+| 5       | 1     E | 4     9 |       8 |  11   | 0 3 5 5 | 0 5 5 0 | 0 3 4 0 | 4 3 2 0 |  11
+|   0   9 |   5   4 | A   1   | C   F   |  12   | 4 0 4 0 | 3 0 2 0 | 0 3 0 5 | 0 2 0 3 |  12
+-----------------------------------------       -----------------------------------------
+| D       |     1   |   8     |       E |  13   | 0 4 4 5 | 5 5 0 5 | 7 0 6 6 | 6 4 2 0 |  13
+|     9   | 8 7     |     D A |   5     |  14   | 7 4 0 5 | 0 0 5 3 | 6 5 0 0 | 6 0 2 4 |  14
+|   A   1 |   9 3   |   2 7   | 8   D   |  15   | 5 0 3 0 | 5 0 0 4 | 6 0 0 6 | 0 3 0 4 |  15
+| 7 5     |     4 F | E 3     |     9 2 |  16   | 0 0 3 3 | 5 5 0 0 | 0 0 4 5 | 4 4 0 0 |  16
+-----------------------------------------       -----------------------------------------
+  1 2 3 4   5 6 7 8   9101112  13141516
+(a)uto play 1 cell  (n)ew cell  (Q)uit :
+
+
+
+
+BOX(4,1) example for analyze_slicy()
+CONSTRAINTS - symbol 5 must be in 1st box(1,1) column, can't be in col 2, can't be in col 3, 
+   but Box 1 candidates still incl col 3
+   Looking at 5s in other boxes forces 5 into Box2 3rd column, and so Box1 1st column.
+NEXT/check: Box 4,1 a 5 can only be in one place cell 4,3 - different but similar from '1 cand cell'.
+-------------------------       -------------------------
+|       |   1 8 |   6   |   1   | 5 4 3 | 3 0 0 | 5 0 5 |  1
+|   7   |       | 1     |   2   | 6 0 5 | 4 2 5 | 0 4 5 |  2
+|   1   |   2 7 |       |   3   | 5 0 5 | 4 0 0 | 4 4 4 |  3
+-------------------------       -------------------------
+| 6     |   8   |   2   |   4   | 0 2 4 | 5 0 4 | 3 0 4 |  4
+| 7   3 |   6   | 5   9 |   5   | 0 2 0 | 3 0 3 | 0 3 0 |  5
+|   8   |   5   |     6 |   6   | 4 0 3 | 6 0 5 | 3 2 0 |  6
+-------------------------       -------------------------
+|       | 5 9   |   3   |   7   | 3 2 5 | 0 0 4 | 4 0 4 |  7
+|     2 |       |   7   |   8   | 5 4 0 | 4 2 4 | 4 0 4 |  8
+|   5   | 8 7   |       |   9   | 4 0 4 | 0 0 5 | 4 3 3 |  9
+-------------------------       -------------------------
+  1 2 3   4 5 6   7 8 9           1 2 3   4 5 6   7 8 9
+
+
+BOX(4,7) example for analyze_slicy()
+PARTIAL Solutions - column within box (or row...)
+2 in 3rd column of boxes, 
+  must be in col 8 at middle box,
+  eliminates 2 from col 8 at top box
+To find these, find the "only 1 column" like in the mid-right box.
+-------------------------       -------------------------
+| 8 3   | 4     | 7 9 6 |   1   | 0 0 3 | 0 2 2 | 0 0 0 |  1
+| 6   4 |     7 |   x 5 |   2   | 0 3 0 | 4 2 0 | 4 4 0 |  2
+| 7     | 3 6   |   x 4 |   3   | 0 3 4 | 0 0 4 | 3 3 0 |  3
+-------------------------       -------------------------
+|   4   | 7 2   | x 5 x |   4   | 3 0 4 | 0 0 2 | 4 0 2 |  4
+|   7 8 |   4   | 9   x |   5   | 3 0 0 | 3 0 2 | 0 4 2 |  5
+|   5   |   9 3 | 4   7 |   6   | 2 0 3 | 3 0 0 | 0 4 0 |  6
+-------------------------       -------------------------
+|       |   7 4 |     8 |   7   | 5 4 6 | 4 0 0 | 3 3 0 |  7
+| 4     |       | 5 7 2 |   8   | 0 3 4 | 3 2 3 | 0 0 0 |  8
+|   8 7 |     1 |   4 9 |   9   | 3 0 0 | 3 2 0 | 2 0 0 |  9
+-------------------------       -------------------------
+  1 2 3   4 5 6   7 8 9           1 2 3   4 5 6   7 8 9
+
+
+
+COLUMN(6) example for analyze_slicy()
+Can solve for 7 (eliminate 8) at 8,6
+8s in col 4 and must be in col 6 so not col 6 at bottom box
+cell 8,6 has 2 candidates: 7 and 8 but can't be 8
+Find any "row/col/box" where C is only in 1 'stripe', eliminates from stripes in this row/ this col / this box.
+  in each case make 3 slices, ask if Candidate Is in exactly 1 of those slices.
+     for row - eliminate candidate in other 2 slices + eliminate from rest of box
+     for col ...
+     for box-horiz ...
+     for box-vert...
+-------------------------       -------------------------      Mensa...#03
+|   1   | 8   9 | 5     |   1   | 3 0 2 | 0 3 0 | 0 4 3 |  1
+| 9 8 2 |     5 |       |   2   | 0 0 0 | 4 4 0 | 3 3 3 |  2
+|   4   | 2     | 9     |   3   | 4 0 3 | 0 3 3 | 0 3 4 |  3
+-------------------------       -------------------------
+|       |   7   |     6 |   4   | 4 3 3 | 4 0 3 | 3 6 0 |  4
+|     3 |   2   | 1     |   5   | 5 4 0 | 2 0 3 | 0 4 4 |  5
+| 1     |   9   |       |   6   | 0 4 4 | 3 0 3 | 4 5 5 |  6
+-------------------------       -------------------------
+|     1 |     3 |   7   |   7   | 4 4 0 | 3 3 0 | 3 0 4 |  7
+|       | 6     | 3 1 4 |   8   | 4 4 4 | 0 2 2 | 0 0 0 |  8
+|   3 4 |     2 |       |   9   | 4 0 0 | 4 3 0 | 2 4 3 |  9
+-------------------------       -------------------------
+  1 2 3   4 5 6   7 8 9           1 2 3   4 5 6   7 8 9
