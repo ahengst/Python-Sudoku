@@ -1,6 +1,6 @@
 # SudokuTool.py by Andy Hengst 2023-11-26
 
-# NEXT - change print() to Logging
+# NEXT - Look at README.md in git repository
 # NEXT look at for loops that might be able to use map OR list comprehension
 # NEXT places where set would work just as good as list
 # learn Debugging
@@ -113,7 +113,7 @@ def display_grid():
             horiz2 += " "  # &&& is there another way to pad leading spaces?
         horiz2 += str(i + 1)
     print(f"{horiz2}         {horiz2}")
-    print(f"Not yet solved: {notsolved}   Total candidates: {ncand}")
+    print(f"Not yet solved: {notsolved}                      Total candidates: {ncand}")
 
     return notsolved, ncand
 
@@ -153,7 +153,7 @@ def add_one_rc(call_mode="play"):
         # <enter> is OK, do nothing
         return -1, -1
     else:
-        print(f"Invalid symbol. Expecting {SYMBOLS}")
+        print(f"Invalid symbol. Typed '{my_sel}' Expecting {SYMBOLS}")
         return -1, -1
 
 
@@ -214,12 +214,12 @@ def digest_a_slice_h(symb, r, ccc):
     #   this function will pop {symb} from other cells in this row or box
     # parameter ccc will be box origin
     # parameters indicate start of a slice (leftmost cell in h direction)
-    print(f"digesting h-slice for '{symb}' near {r+1},{ccc+1}")
+    # print(f"digesting h-slice for '{symb}' near {r+1},{ccc+1}")
     for cc in range(GRID):
         inslice = 0 <= (cc - ccc) < BOX
         # or, is cc within low and high bound of 'whichever slice it is in' ?
         # are we in the candidate's slice of this row?
-        print(f"{inslice}", end=" ")
+        # print(f"{inslice}", end=" ")
         if inslice:  # pop cells directly "above/below" inside this box
             rrr = r - (r % BOX)  # rrr is box origin row
             for poprow in range(rrr, rrr + BOX):
@@ -228,7 +228,7 @@ def digest_a_slice_h(symb, r, ccc):
                 # we are in row rr which could be 1st mid or last row in b
         else:  # pop cells in this row if outside box
             pop_a_cell(symb, r, cc)
-    print("end digesting slice -h")
+    # print("end digesting slice -h")
 
 
 def digest_a_slice_v(symb, rrr, c):
@@ -236,12 +236,12 @@ def digest_a_slice_v(symb, rrr, c):
     #   this function will pop {symb} from other cells in this col or box
     # parameter rrr will be box origin
     # parameters indicate start of a slice (topmost cell in v direction)
-    print(f"digesting v-slice for '{symb}' near {rrr+1},{c+1}")
+    # print(f"digesting v-slice for '{symb}' near {rrr+1},{c+1}")
     for rr in range(GRID):
         inslice = 0 <= (rr - rrr) < BOX
         # or, is rr within low and high bound of 'whichever slice it is in' ?
         # are we in the candidate's slice of this col?
-        print(f"{inslice}", end=" ")
+        # print(f"{inslice}", end=" ")
         if inslice:  # pop cells directly "left/right" inside this box
             ccc = c - (c % BOX)  # ccc is box origin row
             for popcol in range(ccc, ccc + BOX):
@@ -250,7 +250,7 @@ def digest_a_slice_v(symb, rrr, c):
                 # we are in col cc which could be 1st mid or last col in b
         else:  # pop cells in this col if outside box
             pop_a_cell(symb, rr, c)
-    print("end digesting slice -v")
+    # print("end digesting slice -v")
 
 
 def pop_a_cell(symb, r, c):
@@ -313,17 +313,17 @@ def cand_in_row(rr):
         list_g.extend(candidates[rr][cc][:])
     for sym in SYMBOLS:
         if list_g.count(sym) == 1:  # we found a single! locate it...
-            print(
-                f"checkrow: we .count({sym}) appearing only once in Row{rr+1}..",
-                end="",
-            )
+            # print(
+            #    f"checkrow: we .count({sym}) appearing only once in Row{rr+1}..",
+            #    end="",
+            # )
             for cc in range(GRID):
                 if candidates[rr][cc].count(sym) == 1:
-                    print(f".at column {cc+1}")
+                    # print(f".at column {cc+1}")
                     return rr, cc, sym
-            print(
-                f"checkrow: by now we should have found {sym}'s spot in row{rr+1} but DID NOT."
-            )
+            # print(
+            #    f"checkrow: by now we should have found {sym}'s spot in row{rr+1} but DID NOT."
+            # )
     # print(f"checkrow: nothing interesting in row {rr+1}")
     return -1, -1, " "
 
@@ -337,17 +337,17 @@ def cand_in_col(cc):
     # print(f"leftover candidates row{rr+1}: {list_g}")
     for sym in SYMBOLS:
         if list_g.count(sym) == 1:  # we found a single! locate it...
-            print(
-                f"checkcol: we .count({sym}) appearing only once in Col{cc+1}..",
-                end="",
-            )
+            # print(
+            #    f"checkcol: we .count({sym}) appearing only once in Col{cc+1}..",
+            #    end="",
+            # )
             for rr in range(GRID):
                 if candidates[rr][cc].count(sym) == 1:
-                    print(f".at row {rr+1}")
+                    # print(f".at row {rr+1}")
                     return rr, cc, sym
-            print(
-                f"checkrow ERROR: by now we should have found {sym}'s spot in col{cc+1} but DID NOT."
-            )
+            # print(
+            #    f"checkrow ERROR: by now we should have found {sym}'s spot in col{cc+1} but DID NOT."
+            # )
     # print(f"checkcol: nothing interesting in col {cc+1}")
     return -1, -1, " "
 
@@ -360,21 +360,16 @@ def cand_in_box(br, bc):
     for rr in range(BOX):
         for cc in range(BOX):
             list_g.extend(candidates[br + rr][bc + cc][:])
-    print(f"leftover candidates in box at idx{br},{bc}: {list_g}")
+    # print(f"leftover candidates in box at idx{br},{bc}: {list_g}")
     for sym in SYMBOLS:
         if list_g.count(sym) == 1:  # we found a single! locate it...
-            print(
-                f"checkbox: we .count({sym}) appearing only once in box at idx{br},{bc}..",
-                end="",
-            )
+            # print(f"checkbox: we .count({sym}) appearing only once in box at idx{br},{bc}..",end="")
             for rr in range(BOX):
                 for cc in range(BOX):
                     if candidates[br + rr][bc + cc].count(sym) == 1:
-                        print(f".at cell {br+rr+1},{bc+cc+1}")
+                        # print(f".at cell {br+rr+1},{bc+cc+1}")
                         return br + rr, bc + cc, sym
-            print(
-                f"checkbox: by now we should have found {sym}'s spot in box at idx{br},{bc} but DID NOT."
-            )
+            # print(f"checkbox: by now we should have found {sym}'s spot in box at idx{br},{bc} but DID NOT.")
     # print(f"checkbox: nothing interesting in box at idx{br},{bc}")
     return -1, -1, " "
 
@@ -403,7 +398,7 @@ def analyze_slicy():
                 cands_list.extend(candidates[rr][ccc + oo][:])  # &&& list is overkill
                 cands_set = cands_set | {*candidates[rr][ccc + oo][:]}
             slices_as.append(cands_list[:])  # list of lists &&& -> of sets
-        print(f"analyzeslicy: row {rr+1} slics {cands_set}")
+        # print(f"analyzeslicy: row {rr+1} slics {cands_set}")
 
         for symb in cands_set:
             # could do all SYMBOLS but we only do candidates still in 'row'
@@ -413,10 +408,10 @@ def analyze_slicy():
                 continue  # try again with next symbol
 
             # so, found something interesting
-            print(f"row {rr+1} expect '{symb}' at slice {whichsl+1}")
-            print(f"analyzeslicy: nulling '{symb}' in row {rr+1} for other cells...")
+            # print(f"row {rr+1} expect '{symb}' at slice {whichsl+1}")
+            # print(f"analyzeslicy: nulling '{symb}' in row {rr+1} for other cells...")
             digest_a_slice_h(symb, rr, whichsl * BOX)
-            print(" ")
+            # print(" ")
 
     # Again, for the columns this time
     # look for "warm areas" for symbols inside each column.
@@ -430,7 +425,7 @@ def analyze_slicy():
                 cands_list.extend(candidates[rrr + oo][cc][:])  # &&& list is overkill
                 cands_set = cands_set | {*candidates[rrr + oo][cc][:]}
             slices_as.append(cands_list[:])  # list of lists &&& -> of sets
-        print(f"analyzeslicy: col {cc+1} slics {cands_set}")
+        # print(f"analyzeslicy: col {cc+1} slics {cands_set}")
 
         for symb in cands_set:
             # could do all SYMBOLS but we only do candidates still in 'col'
@@ -440,10 +435,10 @@ def analyze_slicy():
                 continue  # try again with next symbol
 
             # so, found something interesting
-            print(f"col {cc+1} expect '{symb}' at slice {whichsl+1}")
-            print(f"analyzeslicy: nulling '{symb}' in col {cc+1} for other cells...")
+            # print(f"col {cc+1} expect '{symb}' at slice {whichsl+1}")
+            # print(f"analyzeslicy: nulling '{symb}' in col {cc+1} for other cells...")
             digest_a_slice_v(symb, whichsl * BOX, cc)
-            print(" ")
+            # print(" ")
 
     # Again, for the boxes this time
     #   Let's try n-horizontal slices and n-vertical slices together!
@@ -465,9 +460,9 @@ def analyze_slicy():
                     cands_set = cands_set | {*candidates[brr + cell][bcc + slic][:]}
                 slices_as_h.append(cands_list_h[:])  # list of lists &&& -> of sets
                 slices_as_v.append(cands_list_v[:])  # list of lists &&& -> of sets
-            print(f"\nanalyzeslicy: box {brr+1},{bcc+1} slices h {slices_as_h}")
-            print(f"\nanalyzeslicy: box {brr+1},{bcc+1} slices v {slices_as_v}")
-            print(f"analyzeslicy: box {brr+1},{bcc+1} slics {cands_set}")
+            # print(f"\nanalyzeslicy: box {brr+1},{bcc+1} slices h {slices_as_h}")
+            # print(f"\nanalyzeslicy: box {brr+1},{bcc+1} slices v {slices_as_v}")
+            # print(f"analyzeslicy: box {brr+1},{bcc+1} slics {cands_set}")
 
             # for box origin at brr,bcc look at its extracted slices...horizontally
             for symb in cands_set:
@@ -479,12 +474,12 @@ def analyze_slicy():
                     continue  # try again with next symbol
 
                 # so, found something interesting horizontally
-                print(f"box idx{brr},{bcc} expect '{symb}' at h-slice {whichsl+1}")
-                print(
-                    f"analyzeslicy: nulling '{symb}' in box idx{brr},{bcc} for other h-slices..."
-                )
+                # print(f"box idx{brr},{bcc} expect '{symb}' at h-slice {whichsl+1}")
+                # print(
+                #    f"analyzeslicy: nulling '{symb}' in box idx{brr},{bcc} for other h-slices..."
+                # )
                 digest_a_slice_h(symb, brr + whichsl, bcc)
-                print(" ")
+                # print(" ")
 
             # for box origin at brr,bcc look at its extracted slices...vertically
             for symb in cands_set:
@@ -496,12 +491,12 @@ def analyze_slicy():
                     continue  # try again with next symbol
 
                 # so, found something interesting vertically
-                print(f"box idx{brr},{bcc} expect '{symb}' at v-slice {whichsl+1}")
-                print(
-                    f"analyzeslicy: nulling '{symb}' in box idx{brr},{bcc} for other v-slices..."
-                )
+                # print(f"box idx{brr},{bcc} expect '{symb}' at v-slice {whichsl+1}")
+                # print(
+                #    f"analyzeslicy: nulling '{symb}' in box idx{brr},{bcc} for other v-slices..."
+                # )
                 digest_a_slice_v(symb, brr, bcc + whichsl)
-                print(" ")
+                # print(" ")
 
                 print(" ")
 
@@ -511,7 +506,7 @@ def warmer(slices, thiscand):  # expecting 2 or 3 or 4 slices as list-of-lists
     #  we can code one logical test here
     # We are looking for the slice a symbol must be in even though it's
     #   not clear which cell it's in. Enough info to eliminate nearby candidates.
-    print(f"warmer: receives parameters {slices} {thiscand}")
+    # print(f"warmer: receives parameters {slices} {thiscand}")
 
     count_cand = 0
     whichslice = 0  # will contain 'idx' of slice where symbol exists
@@ -529,7 +524,7 @@ def warmer(slices, thiscand):  # expecting 2 or 3 or 4 slices as list-of-lists
 
 def main():
     global BOX, GRID, SYMBOLS, candidates, Sudoku
-    print("main: Begin main routine")
+    # print("main: Begin main routine")
     set_size()  # initialize grid dimensions and candidates array
 
     fill_grid()  # manual entry of the puzzle, may contain errors

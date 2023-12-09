@@ -1,5 +1,8 @@
 =======================================================================================================
-Elektor Jan &Feb 2023 #519
+These puzzles were created by others. References included.
+Please give credit if you choose to use these.
+=======================================================================================================
+(c) Elektor Magazine Jan &Feb 2023 Vol 49 #519
 Using functions (1) and (a) gets down to 434 candidates
 One (s) gets to 420 TRY AGAIN after adding 'box' and 'hit one cell' tests
 2nd (s) still 420
@@ -25,7 +28,7 @@ D    3 B4 6    5
 2    9C  60    B
 
 =======================================================================================================
-Elektor March&April 2023 #520
+(c) Elektor Magazine March&April 2023 Vol 49 #520
 solvable by functions (1) and (a)
  13F        E27 
 065          8CD
@@ -45,10 +48,10 @@ D     1  8     E
 75    4FE3    92
 
 =======================================================================================================
-Elektor May&June 2023 #521
+(c) Elektor Magazine May&June 2023 Vol 49 #521
 
 =======================================================================================================
-Mensa Absoloutly Nasty puzzle 01
+Mensa Absolutely Nasty Sudoku level 2 - puzzle 01
 using functions (1) and (a) gets down to 132 candidates
 using (s) still just gets down to 115
 (s)[before Symb-only-in-this-cell]
@@ -97,7 +100,7 @@ F   2BC53419   6
   A241    8C93  
 
 =======================================================================================================
-Mensa Absoloutly Nasty puzzle 02
+Mensa Absolutely Nasty Sudoku level 2 - puzzle 02
 using functions (a) gets down to 170 candidates
 using (s/a/1) gets down to 121->114..(s)[before Symb-only-in-this-cell]
     18 6 
@@ -125,7 +128,7 @@ using (s/a/1) gets down to 121->114..(s)[before Symb-only-in-this-cell]
   1 2 3   4 5 6   7 8 9           1 2 3   4 5 6   7 8 9
 Not yet solved: 40   Total candidates: 114
 =======================================================================================================
-Mensa Absoloutly Nasty puzzle 03
+Mensa Absolutely Nasty Sudoku level 2 - puzzle 03
 SOLVED with (1) + (a) + (s)[before Symb-only-in-this-cell]
    8  5  
 982  5   
@@ -138,7 +141,7 @@ SOLVED with (1) + (a) + (s)[before Symb-only-in-this-cell]
   4  2   
 
 =======================================================================================================
-Newspaper 9/04 Difficulty 3/5 stars
+Edmonton Journal Monster Sudoku 9/04 [Oct 30 2005] Difficulty 3/5 stars
 solvable by functions (1) and (a)
     1 F9 2     E
 D    B 2  A   F 
