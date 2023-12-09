@@ -23,13 +23,13 @@
 # SYMBOLS = []  # the correct group of symbols for player selected grid size
 
 Sudoku = []  # the visible player grid ([rows][columns] )
-candidates = []  # emtpy candidates grid - 2D array each cell containing all symbols
+candidates = []  # candidates grid - 2D array each cell containing all symbols
 
 
 def set_size():
     # Called once to Set the grid size
     # for testing use 4x4, real soduku is 9x9, haxadoku is 16x16.
-    global BOX, GRID, SYMBOLS, candidates  # because these are being assigned in here
+    global BOX, GRID, SYMBOLS, candidates  # assigned in here, used everywhere
     BOX = 0
     while not BOX:
         my_grid = input("Enter grid size (4/9/16): ")
@@ -375,18 +375,20 @@ def cand_in_box(br, bc):
 
 
 def analyze_slicy():
+    # Eliminates candidates, but cannot Auto assign any specific symbols to cells.
+    # make multiple calls to test each row, col, box looking for symbols that
+    # must be present in a slice but we don't know quite which cell yet.
+    # e.g. in a 9x9 grid a slice would be a 3-cell group.
+    # &&&(?really?) ADD: In this slice, the candidate MAY only fit in one spot. Assign it then.
+    # this function does the same sort of thing for 3 geometries: row, column, box.
+
     # IDEA candidate living in a row-slice can be found by checking box or row
     # IDEA candidate living in a col-slice can be found by checking box or col
     # IDEA - both can be dealt with using exact same code. only_one_row_slice() only_one_col_slice()
     # maybe the loop should be from perspective of one slice, look in either direction.
 
-    # make multiple calls to test each row, col, box looking for symbols that
-    # must be present in a slice but we don't know quite which cell yet.
-    # e.g. in a 9x9 grid a slice would be a 3-cell group.
-    # &&& ADD: In this slice, the candidate MAY only fit in one spot. Assign it then.
-    # this function does the same sort of thing for 3 geometries: row, column, box.
+    # &&&(?fixed?)should we move SYMBOLS to outside loop otherwise some combinations never get tested?
 
-    # ??? should we move SYMBOLS to outside loop otherwise some combinations never get tested?
     # look for "warm areas" for symbols inside each row.
     for rr in range(GRID):  # one row at a time...
         slices_as = []  # will be a list of {BOX} lists
@@ -498,7 +500,7 @@ def analyze_slicy():
                 digest_a_slice_v(symb, brr, bcc + whichsl)
                 # print(" ")
 
-                print(" ")
+                # print(" ")
 
 
 def warmer(slices, thiscand):  # expecting 2 or 3 or 4 slices as list-of-lists
