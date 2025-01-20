@@ -596,4 +596,5 @@ def main():
     # next - .. display hint
 
 
-main()
+if __name__ == "__main__":
+    main()
