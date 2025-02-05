@@ -11,6 +11,7 @@ Please give credit if you choose to use these.
 
 =======================================================================================================
 melfortjournal.com The Journal Jan31 2025
+solved using (1),(a),(s)
  4 1     
  18  2   
 29 685  1
